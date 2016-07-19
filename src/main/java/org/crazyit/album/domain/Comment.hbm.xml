@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE hibernate-mapping
+	PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Hibernate映射文件的根元素 -->
+<hibernate-mapping package="org.crazyit.album.domain">
+	<!-- 每个class元素映射一个持久化类 -->
+	<class name="Comment" table="comment_inf">
+		<id name="id" type="int" column="comment_id">
+			<!-- 指定主键生成器策略 -->
+			<generator class="identity"/>
+		</id>
+		<!-- 映射普通属性 -->
+		<property name="title" type="string"/>
+		<property name="comment" type="string"/>
+		<property name="updatetime" type="timestamp"/>
+			<!-- 映射和Photo实体的N-1关联 -->
+		<many-to-one name="photo" column="photo_id"
+			class="Photo" not-null="true"/>
+		
+		<!-- 映射和User实体的N-1关联 -->
+		<many-to-one name="author" column="author_id"
+			class="User" not-null="true"/>
+	</class>
+</hibernate-mapping>
